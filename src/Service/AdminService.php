@@ -25,12 +25,15 @@ class AdminService
         return $users;
     }
 
-    public function modifyTableByIdField($json)
+    public function modifyTableByIdField($UserJSON)
     {
-        $table = $this->em->getRepository(User::class)->find($json->id);
-        if (isset($json, $json->name)) {
-            $table->setName($json->name);
+        
+        $user = $this->em->getRepository(User::class)->find($UserJSON->get('id'));
+        $name = $UserJSON->get('name');
+        if (isset($UserJSON ,$name)) {
+            $user->setName($name);
+            $this->em->flush();
         }
-        return $table;
+        return $user;
     }
 }

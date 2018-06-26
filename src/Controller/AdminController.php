@@ -29,9 +29,8 @@ class AdminController extends Controller
     public function modifyUser(Request $request)
     {
        try{
-        $table = json_decode($request->getContent());
-        $data=$this->get("app.service.admin_service")
-                    ->modifyTableByIdField($table);
+        $userJSONParams = $request->request;
+        $data=$this->get("app.service.admin_service")->modifyTableByIdField($userJSONParams);
         return View::create($data, Response::HTTP_OK,[]);
        }catch(\Exception $exception){
         return View::create($exception, Response::HTTP_OK,[]);
