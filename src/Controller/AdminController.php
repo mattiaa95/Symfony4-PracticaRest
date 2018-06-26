@@ -45,7 +45,7 @@ class AdminController extends Controller
     public function findUser(Request $request){
         $userParamJSON = $request->get('userId');
         if ($userParamJSON){
-            $userData = $this->get('app.service.user_service')->getUser($userParamJSON);
+            $userData = $this->get('app.service.admin_service')->getUser($userParamJSON);
             return new View($userData, Response::HTTP_OK);
         }
 
