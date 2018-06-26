@@ -37,4 +37,17 @@ class AdminController extends Controller
        }
         
     }
+	
+	/**
+     *  @Rest\Get("/find-user", name="find_user")
+     *  @Rest\QueryParam(name="userId",requirements="\d+", nullable=false)
+     */
+    public function findUser(Request $request){
+        $userParamJSON = $request->get('userId');
+        if ($userParamJSON){
+            $userData = $this->get('app.service.user_service')->getUser($userParamJSON);
+            return new View($userData, Response::HTTP_OK);
+        }
+
+    }
 }

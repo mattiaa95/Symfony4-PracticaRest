@@ -36,4 +36,12 @@ class AdminService
         }
         return $user;
     }
+	public function getUser($userId){
+        $user = $this->em->getRepository(User::class)->find($userId);
+        return $userData = [
+            'id'=> $user->getId(),
+            'nombre'=> $user->getName(),
+            'fechaDeRegistro'=> strtotime($user->getRegistryDate()->format('Y-m-d H:i:s'))
+        ];
+    }
 }
